@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [toggle, setToggle] = useState(false);
+
+  const theme = toggle ? 'dark' : 'light';
+
+  const handleToggleTheme = () => {
+    setToggle((prev) => !prev);
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Dark Light Theme</h1>
+      <button onClick={handleToggleTheme}>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</button>
     </div>
   );
 }
